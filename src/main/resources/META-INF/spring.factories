@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.tuyoo.framework.grow.common.exception.GlobalExceptionHandler,\
+com.tuyoo.framework.grow.common.result.ResultAdviceAutoConfiguration,\
+com.tuyoo.framework.grow.common.logger.LoggerAutoConfiguration,\
+com.tuyoo.framework.grow.common.logger.LoggerRecordAutoConfiguration
