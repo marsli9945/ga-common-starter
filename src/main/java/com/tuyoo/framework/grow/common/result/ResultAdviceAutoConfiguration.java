@@ -1,6 +1,7 @@
 package com.tuyoo.framework.grow.common.result;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.tuyoo.framework.grow.common.entities.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -61,7 +62,7 @@ public class ResultAdviceAutoConfiguration implements ResponseBodyAdvice<Object>
         if (body instanceof String)
         {
             response.setHeader("content-type", "application/json");
-            return JSON.toJSONString(commonResult);
+            return JSON.toJSONString(commonResult, SerializerFeature.WriteMapNullValue);
         }
         return commonResult;
     }
