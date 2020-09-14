@@ -5,15 +5,15 @@ package com.tuyoo.framework.grow.common.entities;
  * Created by macro on 2019/4/19.
  */
 public enum ResultCode implements IErrorCode {
-    SUCCESS(200, "操作成功"),
+    SUCCESS(0, "操作成功"),
 
-    UNAUTHORIZED(401, "暂未登录或token已经过期"),
-    FORBIDDEN(403, "没有相关权限"),
-    NULL_POINT(405, "空指针异常"),
-    VALIDATE_FAILED(406, "参数检验失败"),
-    HTTP_CLIENT_ERROR(408, "服务请求错误"),
+    UNAUTHORIZED(1, "暂未登录或token已经过期"),
+    FORBIDDEN(3, "没有相关权限"),
+    NULL_POINT(5, "空指针异常"),
+    VALIDATE_FAILED(6, "参数检验失败"),
+    HTTP_CLIENT_ERROR(8, "服务请求错误"),
 
-    FAILED(500, "操作失败");
+    FAILED(10, "操作失败");
 
     private final Integer code;
     private final String message;

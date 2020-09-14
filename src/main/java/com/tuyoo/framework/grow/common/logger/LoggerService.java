@@ -49,6 +49,20 @@ public class LoggerService
         record(loggerEntities);
     }
 
+    public void trackSelfRequest(RequestEntities requestEntities)
+    {
+        HashMap<String, String> properties = new HashMap<>();
+        HashMap<String, String> lib = new HashMap<>();
+        LoggerEntities loggerEntities = initEntitiesSelfRequest(requestEntities, properties, lib);
+        record(loggerEntities);
+    }
+
+    public void trackSelfRequest(RequestEntities requestEntities, HashMap<String, String> properties, HashMap<String, String> lib)
+    {
+        LoggerEntities loggerEntities = initEntitiesSelfRequest(requestEntities, properties, lib);
+        record(loggerEntities);
+    }
+
     private void record(LoggerEntities loggerEntities)
     {
         if (loggerProperties.getEnableTerminal())
@@ -134,6 +148,37 @@ public class LoggerService
         properties.put("proj_projectId", request.getHeader("ga_project_id"));
         properties.put("proj_request_id", request.getHeader("ga_request_id"));
         properties.put("proj_model_name", request.getHeader("ga_model_name"));
+        properties.put("proj_service_name", loggerProperties.getProperties().getServiceName());
+        properties.put("proj_model_version", loggerProperties.getProperties().getModelVersion());
+
+        loggerEntities.setLib(lib);
+        loggerEntities.setProperties(properties);
+
+        return loggerEntities;
+    }
+
+    private LoggerEntities initEntitiesSelfRequest(RequestEntities requestEntities, HashMap<String, String> properties, HashMap<String, String> lib)
+    {
+        long eventTime = System.currentTimeMillis();
+
+        LoggerEntities loggerEntities = new LoggerEntities();
+        loggerEntities.setClient_id(loggerProperties.getClientId());
+        loggerEntities.setType(TYPE_TRACK);
+        loggerEntities.setEvent_time(eventTime);
+        loggerEntities.setUser_id(requestEntities.getUserId());
+        loggerEntities.setDevice_id(requestEntities.getUserName());
+        loggerEntities.setProject_id(loggerProperties.getProjectId());
+        loggerEntities.setEvent(requestEntities.getEvent());
+
+        long costTime = 0;
+
+        lib.put("lib_language", loggerProperties.getLib().getLanguage());
+        lib.put("lib_service_version", loggerProperties.getLib().getServiceVersion());
+
+        properties.put("proj_costTime", String.format("%d", costTime));
+        properties.put("proj_projectId", requestEntities.getProjectId());
+        properties.put("proj_request_id", requestEntities.getRequestId());
+        properties.put("proj_model_name", requestEntities.getModelName());
         properties.put("proj_service_name", loggerProperties.getProperties().getServiceName());
         properties.put("proj_model_version", loggerProperties.getProperties().getModelVersion());
 
