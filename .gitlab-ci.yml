@@ -1,0 +1,19 @@
+stages:
+  - build-test
+  - build-pro
+
+build_test_job:
+  stage: build-test
+  script:
+    - mvn clean install -Dmaven.test.skip=true
+    - publish-jar trunk
+  only:
+    - develop
+
+build_pro_job:
+  stage: build-pro
+  script:
+    - mvn clean install -Dmaven.test.skip=true
+    - publish-jar release
+  only:
+    - master
