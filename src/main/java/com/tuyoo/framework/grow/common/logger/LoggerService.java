@@ -114,7 +114,6 @@ public class LoggerService
         try
         {
             CommonResult commonResult = send(list);
-            log.info("commonResult:{}", commonResult);
             if (commonResult.getCode() == 200)
             {
                 loggerLocal.flash();
