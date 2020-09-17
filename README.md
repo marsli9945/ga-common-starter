@@ -7,20 +7,7 @@
 &emsp;&emsp;在spring-boot生态中自定义starter功能可以十分方便的对宿主程序进行功能增补及可配置调整，在当前场景下十分适合工具集的开发。在ga-common中不仅提供子服务中可能使用的工具类，同时提供基于配置灵活开启的自动注入程序从而帮助开发者避免重复性劳动。
 
 ## 注意事项
-### 一、pom中必须引入以下两个包，业务中已使用到可以忽略
-```
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-</dependency>
-
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-openfeign</artifactId>
-</dependency>
-```
-
-### 二、在jar包同级目录创建/tem/galog文件用于日志本地缓存
+### 一、在jar包同级目录创建tem/galog文件用于日志本地缓存
 
 
 ## 功能模块
