@@ -1,12 +1,21 @@
 package com.tuyoo.framework.grow.common.logger;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.tuyoo.framework.grow.common.entities.CommonResult;
-import com.tuyoo.framework.grow.common.feign.GaLogFeign;
+import com.tuyoo.framework.grow.common.entities.ResultCode;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +33,10 @@ public class LoggerService
     LoggerProperties loggerProperties;
 
     @Autowired
-    GaLogFeign gaLogFeign;
+    HttpServletRequest request;
 
     @Autowired
-    HttpServletRequest request;
+    RestTemplate restTemplate;
 
     private LinkedBlockingQueue<LoggerEntities> logList = new LinkedBlockingQueue<>();
 
@@ -104,7 +113,8 @@ public class LoggerService
 
         try
         {
-            CommonResult<Object> commonResult = gaLogFeign.record(list);
+            CommonResult commonResult = send(list);
+            log.info("commonResult:{}", commonResult);
             if (commonResult.getCode() == 200)
             {
                 loggerLocal.flash();
@@ -120,6 +130,17 @@ public class LoggerService
             loggerLocal.record(list);
         }
 
+    }
+
+    private CommonResult send(ArrayList<LoggerEntities> list)
+    {
+        String params = JSONArray.toJSONString(list);
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+        headers.setContentType(type);
+
+        HttpEntity<String> request = new HttpEntity<>(params, headers);
+        return restTemplate.postForObject(loggerProperties.getUrl(), request, CommonResult.class);
     }
 
     private LoggerEntities initEntities(HashMap<String, String> properties, HashMap<String, String> lib)
