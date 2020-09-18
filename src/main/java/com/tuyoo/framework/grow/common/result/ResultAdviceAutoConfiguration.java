@@ -1,7 +1,5 @@
 package com.tuyoo.framework.grow.common.result;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.tuyoo.framework.grow.common.entities.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -58,12 +56,6 @@ public class ResultAdviceAutoConfiguration implements ResponseBodyAdvice<Object>
             commonResult = CommonResult.init(status, body.toString(), null);
         }
 
-        //因为handler处理类的返回类型是String，为了保证一致性，这里需要将ResponseResult转回去
-        if (body instanceof String)
-        {
-            response.setHeader("content-type", "application/json");
-            return JSON.toJSONString(commonResult, SerializerFeature.WriteMapNullValue);
-        }
         return commonResult;
     }
 }
