@@ -2,7 +2,6 @@ package com.tuyoo.framework.grow.common.logger;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +12,6 @@ import java.io.File;
 
 @Slf4j
 @Configuration
-@ConditionalOnWebApplication
 @EnableConfigurationProperties(LoggerProperties.class)
 public class LoggerAutoConfiguration
 {

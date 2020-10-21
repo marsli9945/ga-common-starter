@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Slf4j
 @Configuration
+@ConditionalOnWebApplication
 @EnableConfigurationProperties(LoggerProperties.class)
 @ConditionalOnProperty(name = "common.logger.advice", havingValue = "true")
 public class LoggerRecordAutoConfiguration implements WebMvcConfigurer

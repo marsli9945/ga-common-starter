@@ -4,9 +4,7 @@ import com.tuyoo.framework.grow.common.entities.ResultCode;
 import com.tuyoo.framework.grow.common.entities.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
@@ -22,7 +19,6 @@ import java.util.ArrayList;
 
 @Slf4j
 @ControllerAdvice
-@ConditionalOnWebApplication //web应用生效
 @EnableConfigurationProperties(ExceptionProperties.class)
 @ConditionalOnProperty(name = "common.exception.enable", havingValue = "true")
 public class GlobalExceptionHandler
