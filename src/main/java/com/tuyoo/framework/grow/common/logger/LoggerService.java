@@ -31,7 +31,7 @@ public class LoggerService
     HttpServletRequest request;
 
     @Autowired
-    RestTemplate restTemplate;
+    RestTemplate microRestTemplate;
 
     private LinkedBlockingQueue<LoggerEntities> logList = new LinkedBlockingQueue<>();
 
@@ -134,7 +134,7 @@ public class LoggerService
         headers.setContentType(type);
 
         HttpEntity<String> request = new HttpEntity<>(params, headers);
-        return restTemplate.postForObject(loggerProperties.getUrl(), request, CommonResult.class);
+        return microRestTemplate.postForObject(loggerProperties.getUrl(), request, CommonResult.class);
     }
 
     private LoggerEntities initEntities(HashMap<String, String> properties, HashMap<String, String> lib)

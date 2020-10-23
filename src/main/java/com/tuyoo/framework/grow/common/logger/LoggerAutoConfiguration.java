@@ -18,7 +18,7 @@ public class LoggerAutoConfiguration
     @Autowired
     LoggerProperties loggerProperties;
 
-    @Bean
+    @Bean(name = "microRestTemplate")
     @LoadBalanced
     public RestTemplate restTemplate()
     {
