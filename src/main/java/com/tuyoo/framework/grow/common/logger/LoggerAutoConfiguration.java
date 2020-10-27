@@ -6,12 +6,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 
 @Slf4j
 @Configuration
+@EnableScheduling
 @EnableConfigurationProperties(LoggerProperties.class)
 public class LoggerAutoConfiguration
 {

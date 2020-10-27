@@ -93,9 +93,10 @@ public class LoggerService
     }
 
     @PreDestroy
-    @Scheduled(cron = "0 */${grow.analytics.log.send-wait-time} * * * *")
+    @Scheduled(cron = "0 */10 * * * *")
     public void sendList()
     {
+        log.info("logger send ===========================================> Scheduled");
         ArrayList<LoggerEntities> list = new ArrayList<>(logList);
         List<LoggerEntities> local = loggerLocal.read();
         logList.clear();

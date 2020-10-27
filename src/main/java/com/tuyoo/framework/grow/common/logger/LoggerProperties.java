@@ -16,7 +16,6 @@ public class LoggerProperties
 
     private Boolean enableSend = true;
     private Boolean enableTerminal = false;
-    private String sendWaitTime = "10";
     private int sendWaitSize = 10;
 
     private LoggerProperties.LibConfig lib = new LibConfig();
