@@ -93,7 +93,7 @@ public class LoggerService
     }
 
     @PreDestroy
-    @Scheduled(cron = "0 */${grow.analytics.log.send-wait-time} * * * *")
+//    @Scheduled(cron = "0 */${common.logger.sendWaitTime} * * * *")
     public void sendList()
     {
         ArrayList<LoggerEntities> list = new ArrayList<>(logList);
