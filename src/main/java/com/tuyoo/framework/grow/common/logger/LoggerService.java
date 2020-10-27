@@ -92,11 +92,8 @@ public class LoggerService
         }
     }
 
-    /**
-     * 注释
-     */
     @PreDestroy
-//    @Scheduled(cron = "0 */${common.logger.sendWaitTime} * * * *")
+    @Scheduled(cron = "0 */${grow.analytics.log.send-wait-time} * * * *")
     public void sendList()
     {
         ArrayList<LoggerEntities> list = new ArrayList<>(logList);
