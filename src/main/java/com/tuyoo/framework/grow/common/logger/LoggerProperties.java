@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "common.logger")
 public class LoggerProperties
 {
-    private String url = "http://GROW-ANALYTICS-LOG-SERVER//log/record";
+    private String url = "http://GROW-ANALYTICS-LOG-SERVER/log/record";
     private String clientId = "H5_5.0_tuyoo.tuyoo.0-hall20435.tuyoo.GA";
     private String projectId = "20435";
 
