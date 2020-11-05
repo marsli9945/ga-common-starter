@@ -51,7 +51,11 @@ public class LoggerLocal
         ArrayList<LoggerEntities> list = new ArrayList<>();
         if (!file.exists())
         {
-            file.mkdir();
+            try
+            {
+                file.createNewFile();
+            } catch (Exception ignored) {
+            }
             return list;
         }
 

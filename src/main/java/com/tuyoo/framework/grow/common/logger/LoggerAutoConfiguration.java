@@ -37,6 +37,8 @@ public class LoggerAutoConfiguration
         if(!file.getParentFile().exists()) {
             if (!file.getParentFile().mkdirs()) {
                 log.info("GA-COMMON =========> 日志临时文件目录创建失败");
+            } else {
+                log.info("GA-COMMON =========> 日志临时文件目录创建成功");
             }
         }
         try
@@ -44,6 +46,8 @@ public class LoggerAutoConfiguration
             if (!file.exists()) {
                 if (!file.createNewFile()) {
                     log.info("GA-COMMON =========> 日志临时文件创建失败");
+                } else {
+                    log.info("GA-COMMON =========> 日志临时文件创建成功");
                 }
             }
         } catch (Exception e) {
