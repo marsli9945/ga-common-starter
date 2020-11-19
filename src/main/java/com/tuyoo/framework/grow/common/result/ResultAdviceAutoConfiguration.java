@@ -2,6 +2,7 @@ package com.tuyoo.framework.grow.common.result;
 
 import com.tuyoo.framework.grow.common.entities.CommonResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,6 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 @ConditionalOnProperty(name = "common.result.enable", havingValue = "true")
 public class ResultAdviceAutoConfiguration implements ResponseBodyAdvice<Object>
 {
+    @Autowired
+    ResultProperties resultProperties;
+
     public ResultAdviceAutoConfiguration()
     {
         super();
@@ -38,12 +42,20 @@ public class ResultAdviceAutoConfiguration implements ResponseBodyAdvice<Object>
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse)
     {
+        HttpServletResponse response = ((ServletServerHttpResponse) serverHttpResponse).getServletResponse();
+        if (resultProperties.getEnableCors())
+        {
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers", "*");
+            response.setHeader("Access-Control-Expose-Headers", "*");
+        }
+
         if (body instanceof CommonResult)
         {
             return body;
         }
 
-        HttpServletResponse response = ((ServletServerHttpResponse) serverHttpResponse).getServletResponse();
         int status = response.getStatus();
         CommonResult<Object> commonResult;
         if (status >= 200 && status < 300)

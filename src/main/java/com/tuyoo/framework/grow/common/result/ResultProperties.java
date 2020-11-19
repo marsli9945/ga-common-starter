@@ -5,7 +5,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @ConfigurationProperties(prefix = "common.result")
-public class ResultProperties
+class ResultProperties
 {
     private boolean enable;
+    private boolean enableCors;
+
+    public boolean getEnableCors()
+    {
+        return enableCors;
+    }
 }
