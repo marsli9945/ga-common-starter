@@ -11,6 +11,7 @@ class LoggerProperties
     private String clientId = "H5_5.0_tuyoo.tuyoo.0-hall20435.tuyoo.GA";
     private String projectId = "20435";
 
+    private boolean enable;
     private boolean advice;
     private String localPath = "tmp/galog";
 

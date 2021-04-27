@@ -51,7 +51,7 @@ public class ResultAdviceAutoConfiguration implements ResponseBodyAdvice<Object>
             response.setHeader("Access-Control-Expose-Headers", "*");
         }
 
-        if (body instanceof CommonResult || resultProperties.getEnableNoPack())
+        if (!resultProperties.getEnablePack() || body instanceof CommonResult)
         {
             return body;
         }

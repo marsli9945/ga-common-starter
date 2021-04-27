@@ -15,6 +15,6 @@ public class LoggerEntities
     private String project_id;
     private String type;
 
-    private Map<String,String> lib;
-    private Map<String,String> properties;
+    private Map<String, String> lib;
+    private Map<String, String> properties;
 }

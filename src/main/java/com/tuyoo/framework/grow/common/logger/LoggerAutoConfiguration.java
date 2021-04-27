@@ -2,6 +2,7 @@ package com.tuyoo.framework.grow.common.logger;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import java.io.File;
 @Slf4j
 @Configuration
 @EnableScheduling
+@ConditionalOnProperty(name = "common.logger.enable", havingValue = "true")
 @EnableConfigurationProperties(LoggerProperties.class)
 public class LoggerAutoConfiguration
 {
@@ -34,23 +36,33 @@ public class LoggerAutoConfiguration
         loggerService.setLoggerProperties(loggerProperties);
 
         File file = new File(loggerProperties.getLocalPath());
-        if(!file.getParentFile().exists()) {
-            if (!file.getParentFile().mkdirs()) {
+        if (!file.getParentFile().exists())
+        {
+            if (!file.getParentFile().mkdirs())
+            {
                 log.info("GA-COMMON =========> 日志临时文件目录创建失败");
-            } else {
+            }
+            else
+            {
                 log.info("GA-COMMON =========> 日志临时文件目录创建成功");
             }
         }
         try
         {
-            if (!file.exists()) {
-                if (!file.createNewFile()) {
+            if (!file.exists())
+            {
+                if (!file.createNewFile())
+                {
                     log.info("GA-COMMON =========> 日志临时文件创建失败");
-                } else {
+                }
+                else
+                {
                     log.info("GA-COMMON =========> 日志临时文件创建成功");
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             log.info("GA-COMMON =========> 日志临时文件创建失败");
         }
 

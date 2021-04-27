@@ -6,21 +6,25 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CommonException extends RuntimeException {
+public class CommonException extends RuntimeException
+{
     private Integer code;
 
-    public CommonException(Integer code, String message) {
+    public CommonException(Integer code, String message)
+    {
         super(message);
         this.code = code;
     }
 
-    public CommonException(ResultCode resultCode) {
+    public CommonException(ResultCode resultCode)
+    {
         super(resultCode.getMessage());
         this.code = resultCode.getCode();
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "CommonException{" + "code=" + code + ", message=" + this.getMessage() + '}';
     }
 }

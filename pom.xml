@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.tuyoo.framework.grow</groupId>
     <artifactId>ga-common-spring-boot-starter</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <name>ga-common-spring-boot-starter</name>
     <description>GA development common starter</description>
 

@@ -9,15 +9,15 @@ class ResultProperties
 {
     private boolean enable;
     private boolean enableCors;
-    private boolean enableNoPack;
+    private boolean enablePack;
 
     public boolean getEnableCors()
     {
         return enableCors;
     }
 
-    public boolean getEnableNoPack()
+    public boolean getEnablePack()
     {
-        return enableNoPack;
+        return enablePack;
     }
 }

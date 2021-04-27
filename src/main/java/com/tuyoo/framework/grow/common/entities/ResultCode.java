@@ -4,7 +4,8 @@ package com.tuyoo.framework.grow.common.entities;
  * 枚举了一些常用API操作码
  * Created by macro on 2019/4/19.
  */
-public enum ResultCode implements IErrorCode {
+public enum ResultCode implements IErrorCode
+{
     SUCCESS(0, "操作成功"),
 
     UNAUTHORIZED(1, "暂未登录或token已经过期"),
@@ -18,16 +19,19 @@ public enum ResultCode implements IErrorCode {
     private final Integer code;
     private final String message;
 
-    ResultCode(Integer code, String message) {
+    ResultCode(Integer code, String message)
+    {
         this.code = code;
         this.message = message;
     }
 
-    public Integer getCode() {
+    public Integer getCode()
+    {
         return code;
     }
 
-    public String getMessage() {
+    public String getMessage()
+    {
         return message;
     }
 }

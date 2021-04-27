@@ -40,7 +40,8 @@ public class LoggerLocal
                 tmpBuffer.flush();
             }
             tmpBuffer.close();
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -54,7 +55,9 @@ public class LoggerLocal
             try
             {
                 file.createNewFile();
-            } catch (Exception ignored) {
+            }
+            catch (Exception ignored)
+            {
             }
             return list;
         }
@@ -67,7 +70,8 @@ public class LoggerLocal
             {
                 list.add(JSON.parseObject(fileLine, LoggerEntities.class));
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

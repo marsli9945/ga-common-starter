@@ -101,7 +101,8 @@ public class LoggerService
         logList.clear();
         list.addAll(local);
 
-        if (list.size() < 1) {
+        if (list.size() < 1)
+        {
             return;
         }
 
